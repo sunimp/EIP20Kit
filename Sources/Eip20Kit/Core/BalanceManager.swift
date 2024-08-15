@@ -1,7 +1,7 @@
 import BigInt
 import EvmKit
 import Foundation
-import HsExtensions
+import WWExtensions
 
 class BalanceManager {
     weak var delegate: IBalanceManagerDelegate?

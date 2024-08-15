@@ -93,7 +93,7 @@ sendSingle
             // Eip20Kit.Swift kit creates a OutgoingDecoration decoration for transfer method transaction
 
             let transaction = fullTransaction.transaction
-            print("Transaction sent: \(transaction.hash.hs.hexString)")
+            print("Transaction sent: \(transaction.hash.ww.hexString)")
 
             guard let decoration = transaction.decoration as? OutgoingDecoration else {
                 return
@@ -116,7 +116,7 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
         onSuccess: { fullTransactions in
             for fullTransaction in fullTransactions {
                 let transaction = fullTransaction.transaction
-                print("Transaction hash: \(transaction.hash.hs.hexString)")
+                print("Transaction hash: \(transaction.hash.ww.hexString)")
 
                 switch fullTransaction.decoration {
                 case let decoration as IncomingDecoration:

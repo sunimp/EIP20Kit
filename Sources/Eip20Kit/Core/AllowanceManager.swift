@@ -1,6 +1,6 @@
 import BigInt
 import EvmKit
-import HsCryptoKit
+import WWCryptoKit
 
 enum AllowanceParsingError: Error {
     case notFound

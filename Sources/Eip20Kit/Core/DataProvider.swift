@@ -1,8 +1,8 @@
 import BigInt
 import EvmKit
 import Foundation
-import HsExtensions
-import HsToolKit
+import WWExtensions
+import WWToolKit
 
 public class DataProvider {
     private let evmKit: EvmKit.Kit
@@ -16,7 +16,7 @@ extension DataProvider: IDataProvider {
     public func fetchBalance(contractAddress: Address, address: Address) async throws -> BigUInt {
         let data = try await evmKit.fetchCall(contractAddress: contractAddress, data: BalanceOfMethod(owner: address).encodedABI())
 
-        guard let value = BigUInt(data.prefix(32).hs.hex, radix: 16) else {
+        guard let value = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
             throw Eip20Kit.TokenError.invalidHex
         }
 
@@ -72,7 +72,7 @@ extension DataProvider {
             throw Eip20Kit.TokenError.invalidHex
         }
 
-        guard let bigIntValue = BigUInt(data.prefix(32).hs.hex, radix: 16) else {
+        guard let bigIntValue = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
             throw Eip20Kit.TokenError.invalidHex
         }
 

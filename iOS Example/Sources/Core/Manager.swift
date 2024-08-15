@@ -1,7 +1,7 @@
 import Eip20Kit
 import EvmKit
 import Foundation
-import HdWalletKit
+import HDWalletKit
 
 class Manager {
     static let shared = Manager()

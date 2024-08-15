@@ -2,7 +2,7 @@ import BigInt
 import Combine
 import EvmKit
 import Foundation
-import HsToolKit
+import WWToolKit
 
 public class Kit {
     private var cancellables = Set<AnyCancellable>()
