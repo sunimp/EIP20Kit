@@ -1,7 +1,16 @@
+//
+//  WordsController.swift
+//  Eip20Kit-Example
+//
+//  Created by Sun on 2024/8/21.
+//
+
+import UIKit
+
 import EvmKit
 import HDWalletKit
 import SnapKit
-import UIKit
+import UIExtensions
 
 class WordsController: UIViewController {
     private let textView = UITextView()

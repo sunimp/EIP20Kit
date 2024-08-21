@@ -1,7 +1,16 @@
+//
+//  BalanceController.swift
+//  Eip20Kit-Example
+//
+//  Created by Sun on 2024/8/21.
+//
+
+import UIKit
 import Combine
+
 import EvmKit
 import SnapKit
-import UIKit
+import UIExtensions
 
 class BalanceController: UIViewController {
     private let adapter: Eip20Adapter = Manager.shared.adapter

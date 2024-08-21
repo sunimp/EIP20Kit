@@ -1,3 +1,12 @@
+//
+//  Extensions.swift
+//  Eip20Kit
+//
+//  Created by Sun on 2024/8/21.
+//
+
+import Foundation
+
 import BigInt
 import EvmKit
 
@@ -7,8 +16,9 @@ extension Array {
     }
 }
 
-public extension TransactionLog {
-    var eip20EventInstance: ContractEventInstance? {
+extension TransactionLog {
+    
+    public var eip20EventInstance: ContractEventInstance? {
         guard topics.count == 3 else {
             return nil
         }

@@ -1,7 +1,15 @@
-import BigInt
-import Combine
-import EvmKit
+//
+//  Kit.swift
+//  Eip20Kit
+//
+//  Created by Sun on 2024/8/21.
+//
+
 import Foundation
+import Combine
+
+import BigInt
+import EvmKit
 import WWToolKit
 
 public class Kit {
@@ -52,62 +60,63 @@ public class Kit {
     }
 }
 
-public extension Kit {
-    func start() {
+extension Kit {
+    
+    public func start() {
         if case .synced = evmKit.syncState {
             balanceManager.sync()
         }
     }
 
-    func stop() {}
+    public func stop() {}
 
-    func refresh() {}
+    public func refresh() {}
 
-    var syncState: SyncState {
+    public var syncState: SyncState {
         state.syncState
     }
 
-    var transactionsSyncState: SyncState {
+    public var transactionsSyncState: SyncState {
         evmKit.transactionsSyncState
     }
 
-    var balance: BigUInt? {
+    public var balance: BigUInt? {
         state.balance
     }
 
-    func transactions(from hash: Data?, limit: Int?) -> [FullTransaction] {
+    public func transactions(from hash: Data?, limit: Int?) -> [FullTransaction] {
         transactionManager.transactions(from: hash, limit: limit)
     }
 
-    func pendingTransactions() -> [FullTransaction] {
+    public func pendingTransactions() -> [FullTransaction] {
         transactionManager.pendingTransactions()
     }
 
-    var syncStatePublisher: AnyPublisher<SyncState, Never> {
+    public var syncStatePublisher: AnyPublisher<SyncState, Never> {
         state.syncStateSubject.eraseToAnyPublisher()
     }
 
-    var transactionsSyncStatePublisher: AnyPublisher<SyncState, Never> {
+    public var transactionsSyncStatePublisher: AnyPublisher<SyncState, Never> {
         evmKit.transactionsSyncStatePublisher
     }
 
-    var balancePublisher: AnyPublisher<BigUInt, Never> {
+    public var balancePublisher: AnyPublisher<BigUInt, Never> {
         state.balanceSubject.eraseToAnyPublisher()
     }
 
-    var transactionsPublisher: AnyPublisher<[FullTransaction], Never> {
+    public var transactionsPublisher: AnyPublisher<[FullTransaction], Never> {
         transactionManager.transactionsPublisher
     }
 
-    func allowance(spenderAddress: Address, defaultBlockParameter: DefaultBlockParameter = .latest) async throws -> String {
+    public func allowance(spenderAddress: Address, defaultBlockParameter: DefaultBlockParameter = .latest) async throws -> String {
         try await allowanceManager.allowance(spenderAddress: spenderAddress, defaultBlockParameter: defaultBlockParameter).description
     }
 
-    func approveTransactionData(spenderAddress: Address, amount: BigUInt) -> TransactionData {
+    public func approveTransactionData(spenderAddress: Address, amount: BigUInt) -> TransactionData {
         allowanceManager.approveTransactionData(spenderAddress: spenderAddress, amount: amount)
     }
 
-    func transferTransactionData(to: Address, value: BigUInt) -> TransactionData {
+    public func transferTransactionData(to: Address, value: BigUInt) -> TransactionData {
         transactionManager.transferTransactionData(to: to, value: value)
     }
 }
@@ -123,8 +132,8 @@ extension Kit: IBalanceManagerDelegate {
     }
 }
 
-public extension Kit {
-    static func instance(evmKit: EvmKit.Kit, contractAddress: Address) throws -> Kit {
+extension Kit {
+    public static func instance(evmKit: EvmKit.Kit, contractAddress: Address) throws -> Kit {
         let address = evmKit.address
 
         let dataProvider: IDataProvider = DataProvider(evmKit: evmKit)
@@ -139,20 +148,20 @@ public extension Kit {
         return kit
     }
 
-    static func addTransactionSyncer(to evmKit: EvmKit.Kit) {
+    public static func addTransactionSyncer(to evmKit: EvmKit.Kit) {
         let syncer = Eip20TransactionSyncer(provider: evmKit.transactionProvider, storage: evmKit.eip20Storage)
         evmKit.add(transactionSyncer: syncer)
     }
 
-    static func addDecorators(to evmKit: EvmKit.Kit) {
+    public static func addDecorators(to evmKit: EvmKit.Kit) {
         evmKit.add(methodDecorator: Eip20MethodDecorator(contractMethodFactories: Eip20ContractMethodFactories.shared))
         evmKit.add(eventDecorator: Eip20EventDecorator(userAddress: evmKit.address, storage: evmKit.eip20Storage))
         evmKit.add(transactionDecorator: Eip20TransactionDecorator(userAddress: evmKit.address))
     }
 }
 
-public extension Kit {
-    static func tokenInfo(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> TokenInfo {
+extension Kit {
+    public static func tokenInfo(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> TokenInfo {
         async let name = try DataProvider.fetchName(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
         async let symbol = try DataProvider.fetchSymbol(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
         async let decimals = try DataProvider.fetchDecimals(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
@@ -161,8 +170,9 @@ public extension Kit {
     }
 }
 
-public extension Kit {
-    struct TokenInfo {
+extension Kit {
+    
+    public struct TokenInfo {
         public let name: String
         public let symbol: String
         public let decimals: Int

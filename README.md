@@ -149,11 +149,11 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/horizontalsystems/Eip20Kit.Swift.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.0.5"))
 ]
 ```
 
 ## License
 
-The `Eip20Kit.Swift` toolkit is open source and available under the terms of the [MIT License](https://github.com/horizontalsystems/ethereum-kit-ios/blob/master/LICENSE).
+The `Eip20Kit.Swift` toolkit is open source and available under the terms of the [MIT License](https://github.com/sunimp/Eip20Kit.Swift/blob/master/LICENSE).
 

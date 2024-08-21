@@ -1,3 +1,12 @@
+//
+//  Eip20TransactionDecorator.swift
+//  Eip20Kit
+//
+//  Created by Sun on 2024/8/21.
+//
+
+import Foundation
+
 import BigInt
 import EvmKit
 

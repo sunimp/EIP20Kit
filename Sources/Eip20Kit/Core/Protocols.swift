@@ -1,7 +1,15 @@
-import BigInt
-import Combine
-import EvmKit
+//
+//  Protocols.swift
+//  Eip20Kit
+//
+//  Created by Sun on 2024/8/21.
+//
+
 import Foundation
+import Combine
+
+import BigInt
+import EvmKit
 
 protocol IBalanceManagerDelegate: AnyObject {
     func onSyncBalanceSuccess(balance: BigUInt)
