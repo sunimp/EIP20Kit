@@ -11,7 +11,7 @@ import BigInt
 import EvmKit
 
 class ApproveMethodFactory: IContractMethodFactory {
-    let methodID: Data = ContractMethodHelper.methodID(signature: ApproveMethod.methodSignature)
+    let methodId: Data = ContractMethodHelper.methodId(signature: ApproveMethod.methodSignature)
 
     func createMethod(inputArguments: Data) throws -> ContractMethod {
         let spender = Address(raw: inputArguments[12 ..< 32])

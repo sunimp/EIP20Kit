@@ -20,7 +20,7 @@ class KitState {
         }
     }
 
-    var balance: BigUInt? = nil {
+    var balance: BigUInt? {
         didSet {
             if let balance, balance != oldValue {
                 balanceSubject.send(balance)

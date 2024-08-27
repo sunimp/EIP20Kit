@@ -14,7 +14,7 @@ import WWExtensions
 // MARK: - BalanceManager
 
 class BalanceManager {
-    weak var delegate: IBalanceManagerDelegate? = nil
+    weak var delegate: IBalanceManagerDelegate?
 
     private let storage: Eip20Storage
     private let contractAddress: Address
