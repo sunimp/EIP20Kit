@@ -11,9 +11,13 @@ import BigInt
 import EvmKit
 import WWCryptoKit
 
+// MARK: - AllowanceParsingError
+
 enum AllowanceParsingError: Error {
     case notFound
 }
+
+// MARK: - AllowanceManager
 
 class AllowanceManager {
     private let evmKit: EvmKit.Kit
@@ -28,7 +32,11 @@ class AllowanceManager {
 
     func allowance(spenderAddress: Address, defaultBlockParameter: DefaultBlockParameter) async throws -> BigUInt {
         let methodData = AllowanceMethod(owner: address, spender: spenderAddress).encodedABI()
-        let data = try await evmKit.fetchCall(contractAddress: contractAddress, data: methodData, defaultBlockParameter: defaultBlockParameter)
+        let data = try await evmKit.fetchCall(
+            contractAddress: contractAddress,
+            data: methodData,
+            defaultBlockParameter: defaultBlockParameter
+        )
         return BigUInt(data[0 ... 31])
     }
 

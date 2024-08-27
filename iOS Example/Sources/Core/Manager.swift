@@ -40,7 +40,7 @@ class Manager {
             chain: configuration.chain,
             rpcSource: configuration.rpcSource,
             transactionSource: configuration.transactionSource,
-            walletId: "walletId",
+            walletID: "walletID",
             minLogLevel: configuration.minLogLevel
         )
 

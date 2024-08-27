@@ -10,6 +10,8 @@ import Foundation
 import BigInt
 import EvmKit
 
+// MARK: - Eip20TransactionDecorator
+
 class Eip20TransactionDecorator {
     private let userAddress: Address
 
@@ -18,8 +20,17 @@ class Eip20TransactionDecorator {
     }
 }
 
+// MARK: ITransactionDecorator
+
 extension Eip20TransactionDecorator: ITransactionDecorator {
-    public func decoration(from: Address?, to: Address?, value: BigUInt?, contractMethod: ContractMethod?, internalTransactions _: [InternalTransaction], eventInstances: [ContractEventInstance]) -> TransactionDecoration? {
+    public func decoration(
+        from: Address?,
+        to: Address?,
+        value: BigUInt?,
+        contractMethod: ContractMethod?,
+        internalTransactions _: [InternalTransaction],
+        eventInstances: [ContractEventInstance]
+    ) -> TransactionDecoration? {
         guard let from, let to, let contractMethod else {
             return nil
         }
@@ -31,7 +42,8 @@ extension Eip20TransactionDecorator: ITransactionDecorator {
                     to: transferMethod.to,
                     value: transferMethod.value,
                     sentToSelf: transferMethod.to == userAddress,
-                    tokenInfo: eventInstances.compactMap { $0 as? TransferEventInstance }.first { $0.contractAddress == to }?.tokenInfo
+                    tokenInfo: eventInstances.compactMap { $0 as? TransferEventInstance }.first { $0.contractAddress == to }?
+                        .tokenInfo
                 )
             }
         }

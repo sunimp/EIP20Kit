@@ -11,8 +11,10 @@ import BigInt
 import EvmKit
 import WWExtensions
 
+// MARK: - BalanceManager
+
 class BalanceManager {
-    weak var delegate: IBalanceManagerDelegate?
+    weak var delegate: IBalanceManagerDelegate? = nil
 
     private let storage: Eip20Storage
     private let contractAddress: Address
@@ -41,6 +43,8 @@ class BalanceManager {
         }
     }
 }
+
+// MARK: IBalanceManager
 
 extension BalanceManager: IBalanceManager {
     var balance: BigUInt? {

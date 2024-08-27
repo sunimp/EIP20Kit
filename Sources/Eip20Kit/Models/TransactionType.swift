@@ -19,7 +19,7 @@ public enum TransactionType: String, DatabaseValueConvertible {
     }
 
     public static func fromDatabaseValue(_ dbValue: DatabaseValue) -> TransactionType? {
-        if case let DatabaseValue.Storage.string(value) = dbValue.storage {
+        if case DatabaseValue.Storage.string(let value) = dbValue.storage {
             return TransactionType(rawValue: value)
         }
 

@@ -10,6 +10,8 @@ import Foundation
 import BigInt
 import EvmKit
 
+// MARK: - TransferEventInstance
+
 public class TransferEventInstance: ContractEventInstance {
     static let signature = ContractEvent(name: "Transfer", arguments: [.address, .address, .uint256]).signature
 
@@ -36,12 +38,19 @@ public class TransferEventInstance: ContractEventInstance {
         }
 
         if to == userAddress {
-            tags.append(TransactionTag(type: .incoming, protocol: .eip20, contractAddress: contractAddress, addresses: [from.hex]))
+            tags.append(TransactionTag(
+                type: .incoming,
+                protocol: .eip20,
+                contractAddress: contractAddress,
+                addresses: [from.hex]
+            ))
         }
 
         return tags
     }
 }
+
+// MARK: - TokenInfo
 
 public struct TokenInfo {
     public let tokenName: String

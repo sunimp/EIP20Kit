@@ -9,6 +9,8 @@ import Foundation
 
 import EvmKit
 
+// MARK: - Eip20EventDecorator
+
 class Eip20EventDecorator {
     private let userAddress: Address
     private let storage: Eip20Storage
@@ -18,6 +20,8 @@ class Eip20EventDecorator {
         self.storage = storage
     }
 }
+
+// MARK: IEventDecorator
 
 extension Eip20EventDecorator: IEventDecorator {
     public func contractEventInstancesMap(transactions: [Transaction]) -> [Data: [ContractEventInstance]] {

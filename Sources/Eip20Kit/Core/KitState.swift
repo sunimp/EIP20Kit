@@ -5,8 +5,8 @@
 //  Created by Sun on 2024/8/21.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 import BigInt
 import EvmKit
@@ -20,7 +20,7 @@ class KitState {
         }
     }
 
-    var balance: BigUInt? {
+    var balance: BigUInt? = nil {
         didSet {
             if let balance, balance != oldValue {
                 balanceSubject.send(balance)

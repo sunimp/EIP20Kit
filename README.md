@@ -139,9 +139,9 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
 
 ## Prerequisites
 
-* Xcode 10.0+
-* Swift 5.5+
-* iOS 11+
+* Xcode 15.0+
+* Swift 5.10+
+* iOS 14+
 
 ## Installation
 
@@ -149,7 +149,7 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.0.5"))
+    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.0.7"))
 ]
 ```
 

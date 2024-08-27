@@ -12,6 +12,8 @@ import EvmKit
 import WWExtensions
 import WWToolKit
 
+// MARK: - DataProvider
+
 public class DataProvider {
     private let evmKit: EvmKit.Kit
 
@@ -20,9 +22,14 @@ public class DataProvider {
     }
 }
 
+// MARK: IDataProvider
+
 extension DataProvider: IDataProvider {
     public func fetchBalance(contractAddress: Address, address: Address) async throws -> BigUInt {
-        let data = try await evmKit.fetchCall(contractAddress: contractAddress, data: BalanceOfMethod(owner: address).encodedABI())
+        let data = try await evmKit.fetchCall(
+            contractAddress: contractAddress,
+            data: BalanceOfMethod(owner: address).encodedABI()
+        )
 
         guard let value = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
             throw Eip20Kit.TokenError.invalidHex
@@ -34,7 +41,12 @@ extension DataProvider: IDataProvider {
 
 extension DataProvider {
     static func fetchName(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> String {
-        let data = try await EvmKit.Kit.call(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress, data: NameMethod().encodedABI())
+        let data = try await EvmKit.Kit.call(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress,
+            data: NameMethod().encodedABI()
+        )
 
         guard !data.isEmpty else {
             throw Eip20Kit.TokenError.invalidHex
@@ -53,8 +65,17 @@ extension DataProvider {
         return string
     }
 
-    static func fetchSymbol(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> String {
-        let data = try await EvmKit.Kit.call(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress, data: SymbolMethod().encodedABI())
+    static func fetchSymbol(
+        networkManager: NetworkManager,
+        rpcSource: RpcSource,
+        contractAddress: Address
+    ) async throws -> String {
+        let data = try await EvmKit.Kit.call(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress,
+            data: SymbolMethod().encodedABI()
+        )
 
         guard !data.isEmpty else {
             throw Eip20Kit.TokenError.invalidHex
@@ -73,8 +94,17 @@ extension DataProvider {
         return string
     }
 
-    static func fetchDecimals(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> Int {
-        let data = try await EvmKit.Kit.call(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress, data: DecimalsMethod().encodedABI())
+    static func fetchDecimals(
+        networkManager: NetworkManager,
+        rpcSource: RpcSource,
+        contractAddress: Address
+    ) async throws -> Int {
+        let data = try await EvmKit.Kit.call(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress,
+            data: DecimalsMethod().encodedABI()
+        )
 
         guard !data.isEmpty else {
             throw Eip20Kit.TokenError.invalidHex

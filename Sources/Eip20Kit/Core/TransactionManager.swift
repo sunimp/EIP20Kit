@@ -5,11 +5,13 @@
 //  Created by Sun on 2024/8/21.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 import BigInt
 import EvmKit
+
+// MARK: - TransactionManager
 
 class TransactionManager {
     private var cancellables = Set<AnyCancellable>()
@@ -49,6 +51,8 @@ class TransactionManager {
         transactionsSubject.send(eip20Transactions)
     }
 }
+
+// MARK: ITransactionManager
 
 extension TransactionManager: ITransactionManager {
     func transactions(from hash: Data?, limit: Int?) -> [FullTransaction] {

@@ -5,12 +5,14 @@
 //  Created by Sun on 2024/8/21.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 import BigInt
 import EvmKit
 import WWToolKit
+
+// MARK: - Kit
 
 public class Kit {
     private var cancellables = Set<AnyCancellable>()
@@ -23,7 +25,14 @@ public class Kit {
 
     private let state: KitState
 
-    init(contractAddress: Address, evmKit: EvmKit.Kit, transactionManager: ITransactionManager, balanceManager: IBalanceManager, allowanceManager: AllowanceManager, state: KitState = KitState()) {
+    init(
+        contractAddress: Address,
+        evmKit: EvmKit.Kit,
+        transactionManager: ITransactionManager,
+        balanceManager: IBalanceManager,
+        allowanceManager: AllowanceManager,
+        state: KitState = KitState()
+    ) {
         self.contractAddress = contractAddress
         self.evmKit = evmKit
         self.transactionManager = transactionManager
@@ -52,9 +61,11 @@ public class Kit {
         case .synced:
             state.syncState = .syncing(progress: nil)
             balanceManager.sync()
+
         case .syncing:
             state.syncState = .syncing(progress: nil)
-        case let .notSynced(error):
+
+        case .notSynced(let error):
             state.syncState = .notSynced(error: error)
         }
     }
@@ -68,9 +79,9 @@ extension Kit {
         }
     }
 
-    public func stop() {}
+    public func stop() { }
 
-    public func refresh() {}
+    public func refresh() { }
 
     public var syncState: SyncState {
         state.syncState
@@ -108,8 +119,12 @@ extension Kit {
         transactionManager.transactionsPublisher
     }
 
-    public func allowance(spenderAddress: Address, defaultBlockParameter: DefaultBlockParameter = .latest) async throws -> String {
-        try await allowanceManager.allowance(spenderAddress: spenderAddress, defaultBlockParameter: defaultBlockParameter).description
+    public func allowance(
+        spenderAddress: Address,
+        defaultBlockParameter: DefaultBlockParameter = .latest
+    ) async throws -> String {
+        try await allowanceManager.allowance(spenderAddress: spenderAddress, defaultBlockParameter: defaultBlockParameter)
+            .description
     }
 
     public func approveTransactionData(spenderAddress: Address, amount: BigUInt) -> TransactionData {
@@ -120,6 +135,8 @@ extension Kit {
         transactionManager.transferTransactionData(to: to, value: value)
     }
 }
+
+// MARK: IBalanceManagerDelegate
 
 extension Kit: IBalanceManagerDelegate {
     func onSyncBalanceSuccess(balance: BigUInt) {
@@ -137,11 +154,26 @@ extension Kit {
         let address = evmKit.address
 
         let dataProvider: IDataProvider = DataProvider(evmKit: evmKit)
-        let transactionManager = TransactionManager(evmKit: evmKit, contractAddress: contractAddress, contractMethodFactories: Eip20ContractMethodFactories.shared)
-        let balanceManager = BalanceManager(storage: evmKit.eip20Storage, contractAddress: contractAddress, address: address, dataProvider: dataProvider)
+        let transactionManager = TransactionManager(
+            evmKit: evmKit,
+            contractAddress: contractAddress,
+            contractMethodFactories: Eip20ContractMethodFactories.shared
+        )
+        let balanceManager = BalanceManager(
+            storage: evmKit.eip20Storage,
+            contractAddress: contractAddress,
+            address: address,
+            dataProvider: dataProvider
+        )
         let allowanceManager = AllowanceManager(evmKit: evmKit, contractAddress: contractAddress, address: address)
 
-        let kit = Kit(contractAddress: contractAddress, evmKit: evmKit, transactionManager: transactionManager, balanceManager: balanceManager, allowanceManager: allowanceManager)
+        let kit = Kit(
+            contractAddress: contractAddress,
+            evmKit: evmKit,
+            transactionManager: transactionManager,
+            balanceManager: balanceManager,
+            allowanceManager: allowanceManager
+        )
 
         balanceManager.delegate = kit
 
@@ -161,14 +193,32 @@ extension Kit {
 }
 
 extension Kit {
-    public static func tokenInfo(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> TokenInfo {
-        async let name = try DataProvider.fetchName(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
-        async let symbol = try DataProvider.fetchSymbol(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
-        async let decimals = try DataProvider.fetchDecimals(networkManager: networkManager, rpcSource: rpcSource, contractAddress: contractAddress)
+    public static func tokenInfo(
+        networkManager: NetworkManager,
+        rpcSource: RpcSource,
+        contractAddress: Address
+    ) async throws -> TokenInfo {
+        async let name = try DataProvider.fetchName(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress
+        )
+        async let symbol = try DataProvider.fetchSymbol(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress
+        )
+        async let decimals = try DataProvider.fetchDecimals(
+            networkManager: networkManager,
+            rpcSource: rpcSource,
+            contractAddress: contractAddress
+        )
 
         return try await TokenInfo(name: name, symbol: symbol, decimals: decimals)
     }
 }
+
+// MARK: Kit.TokenInfo
 
 extension Kit {
     

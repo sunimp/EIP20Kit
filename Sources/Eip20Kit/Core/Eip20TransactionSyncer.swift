@@ -10,6 +10,8 @@ import Foundation
 import BigInt
 import EvmKit
 
+// MARK: - Eip20TransactionSyncer
+
 class Eip20TransactionSyncer {
     private let provider: ITransactionProvider
     private let storage: Eip20Storage
@@ -41,6 +43,8 @@ class Eip20TransactionSyncer {
         storage.save(events: events)
     }
 }
+
+// MARK: ITransactionSyncer
 
 extension Eip20TransactionSyncer: ITransactionSyncer {
     func transactions() async throws -> ([Transaction], Bool) {

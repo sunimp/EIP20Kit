@@ -11,7 +11,7 @@ import BigInt
 import GRDB
 
 class TokenBalance: Record {
-    let primaryKey: String = "primaryKey"
+    let primaryKey = "primaryKey"
     let value: BigUInt?
 
     init(value: BigUInt?) {
