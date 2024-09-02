@@ -1,8 +1,7 @@
 //
 //  Extensions.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2021/1/8.
 //
 
 import Foundation
@@ -17,7 +16,6 @@ extension Array {
 }
 
 extension TransactionLog {
-    
     public var eip20EventInstance: ContractEventInstance? {
         guard topics.count == 3 else {
             return nil
@@ -37,7 +35,12 @@ extension TransactionLog {
         }
 
         if signature == ApproveEventInstance.signature {
-            return ApproveEventInstance(contractAddress: address, owner: firstParam, spender: secondParam, value: BigUInt(data))
+            return ApproveEventInstance(
+                contractAddress: address,
+                owner: firstParam,
+                spender: secondParam,
+                value: BigUInt(data)
+            )
         }
 
         return nil

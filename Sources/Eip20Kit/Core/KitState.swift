@@ -1,8 +1,7 @@
 //
 //  KitState.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2019/4/26.
 //
 
 import Combine
@@ -12,6 +11,13 @@ import BigInt
 import EvmKit
 
 class KitState {
+    // MARK: Properties
+
+    let syncStateSubject = PassthroughSubject<SyncState, Never>()
+    let balanceSubject = PassthroughSubject<BigUInt, Never>()
+
+    // MARK: Computed Properties
+
     var syncState: SyncState = .syncing(progress: nil) {
         didSet {
             if syncState != oldValue {
@@ -27,7 +33,4 @@ class KitState {
             }
         }
     }
-
-    let syncStateSubject = PassthroughSubject<SyncState, Never>()
-    let balanceSubject = PassthroughSubject<BigUInt, Never>()
 }

@@ -1,8 +1,7 @@
 //
 //  BalanceManager.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2019/4/18.
 //
 
 import Foundation
@@ -14,6 +13,8 @@ import WWExtensions
 // MARK: - BalanceManager
 
 class BalanceManager {
+    // MARK: Properties
+
     weak var delegate: IBalanceManagerDelegate?
 
     private let storage: Eip20Storage
@@ -22,12 +23,16 @@ class BalanceManager {
     private let dataProvider: IDataProvider
     private var tasks = Set<AnyTask>()
 
+    // MARK: Lifecycle
+
     init(storage: Eip20Storage, contractAddress: Address, address: Address, dataProvider: IDataProvider) {
         self.storage = storage
         self.contractAddress = contractAddress
         self.address = address
         self.dataProvider = dataProvider
     }
+
+    // MARK: Functions
 
     private func save(balance: BigUInt) {
         storage.save(balance: balance, contractAddress: contractAddress)

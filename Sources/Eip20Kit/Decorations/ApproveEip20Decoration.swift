@@ -1,8 +1,7 @@
 //
 //  ApproveEip20Decoration.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2022/4/7.
 //
 
 import Foundation
@@ -11,9 +10,13 @@ import BigInt
 import EvmKit
 
 public class ApproveEip20Decoration: TransactionDecoration {
+    // MARK: Properties
+
     public let contractAddress: Address
     public let spender: Address
     public let value: BigUInt
+
+    // MARK: Lifecycle
 
     init(contractAddress: Address, spender: Address, value: BigUInt) {
         self.contractAddress = contractAddress
@@ -22,6 +25,8 @@ public class ApproveEip20Decoration: TransactionDecoration {
 
         super.init()
     }
+
+    // MARK: Overridden Functions
 
     override public func tags() -> [TransactionTag] {
         [

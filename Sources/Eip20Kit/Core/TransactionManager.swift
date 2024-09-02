@@ -1,8 +1,7 @@
 //
-//  Protocols.swift
-//  Eip20Kit
+//  TransactionManager.swift
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2019/4/18.
 //
 
 import Combine
@@ -14,6 +13,8 @@ import EvmKit
 // MARK: - TransactionManager
 
 class TransactionManager {
+    // MARK: Properties
+
     private var cancellables = Set<AnyCancellable>()
 
     private let evmKit: EvmKit.Kit
@@ -24,9 +25,13 @@ class TransactionManager {
 
     private let transactionsSubject = PassthroughSubject<[FullTransaction], Never>()
 
+    // MARK: Computed Properties
+
     var transactionsPublisher: AnyPublisher<[FullTransaction], Never> {
         transactionsSubject.eraseToAnyPublisher()
     }
+
+    // MARK: Lifecycle
 
     init(evmKit: EvmKit.Kit, contractAddress: Address, contractMethodFactories: Eip20ContractMethodFactories) {
         self.evmKit = evmKit
@@ -42,6 +47,8 @@ class TransactionManager {
             }
             .store(in: &cancellables)
     }
+
+    // MARK: Functions
 
     private func processTransactions(eip20Transactions: [FullTransaction]) {
         guard !eip20Transactions.isEmpty else {

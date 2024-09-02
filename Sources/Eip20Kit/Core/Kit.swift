@@ -1,8 +1,7 @@
 //
 //  Kit.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2019/4/10.
 //
 
 import Combine
@@ -15,6 +14,8 @@ import WWToolKit
 // MARK: - Kit
 
 public class Kit {
+    // MARK: Properties
+
     private var cancellables = Set<AnyCancellable>()
 
     private let contractAddress: Address
@@ -24,6 +25,8 @@ public class Kit {
     private let allowanceManager: AllowanceManager
 
     private let state: KitState
+
+    // MARK: Lifecycle
 
     init(
         contractAddress: Address,
@@ -56,6 +59,8 @@ public class Kit {
             .store(in: &cancellables)
     }
 
+    // MARK: Functions
+
     private func onUpdateSyncState(syncState: EvmKit.SyncState) {
         switch syncState {
         case .synced:
@@ -65,14 +70,13 @@ public class Kit {
         case .syncing:
             state.syncState = .syncing(progress: nil)
 
-        case .notSynced(let error):
+        case let .notSynced(error):
             state.syncState = .notSynced(error: error)
         }
     }
 }
 
 extension Kit {
-    
     public func start() {
         if case .synced = evmKit.syncState {
             balanceManager.sync()
@@ -122,9 +126,13 @@ extension Kit {
     public func allowance(
         spenderAddress: Address,
         defaultBlockParameter: DefaultBlockParameter = .latest
-    ) async throws -> String {
-        try await allowanceManager.allowance(spenderAddress: spenderAddress, defaultBlockParameter: defaultBlockParameter)
-            .description
+    ) async throws
+        -> String {
+        try await allowanceManager.allowance(
+            spenderAddress: spenderAddress,
+            defaultBlockParameter: defaultBlockParameter
+        )
+        .description
     }
 
     public func approveTransactionData(spenderAddress: Address, amount: BigUInt) -> TransactionData {
@@ -197,7 +205,8 @@ extension Kit {
         networkManager: NetworkManager,
         rpcSource: RpcSource,
         contractAddress: Address
-    ) async throws -> TokenInfo {
+    ) async throws
+        -> TokenInfo {
         async let name = try DataProvider.fetchName(
             networkManager: networkManager,
             rpcSource: rpcSource,
@@ -221,7 +230,6 @@ extension Kit {
 // MARK: Kit.TokenInfo
 
 extension Kit {
-    
     public struct TokenInfo {
         public let name: String
         public let symbol: String

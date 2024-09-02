@@ -1,8 +1,7 @@
 //
 //  DataProvider.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2019/4/12.
 //
 
 import Foundation
@@ -15,7 +14,11 @@ import WWToolKit
 // MARK: - DataProvider
 
 public class DataProvider {
+    // MARK: Properties
+
     private let evmKit: EvmKit.Kit
+
+    // MARK: Lifecycle
 
     public init(evmKit: EvmKit.Kit) {
         self.evmKit = evmKit
@@ -40,7 +43,12 @@ extension DataProvider: IDataProvider {
 }
 
 extension DataProvider {
-    static func fetchName(networkManager: NetworkManager, rpcSource: RpcSource, contractAddress: Address) async throws -> String {
+    static func fetchName(
+        networkManager: NetworkManager,
+        rpcSource: RpcSource,
+        contractAddress: Address
+    ) async throws
+        -> String {
         let data = try await EvmKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,
@@ -69,7 +77,8 @@ extension DataProvider {
         networkManager: NetworkManager,
         rpcSource: RpcSource,
         contractAddress: Address
-    ) async throws -> String {
+    ) async throws
+        -> String {
         let data = try await EvmKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,
@@ -98,7 +107,8 @@ extension DataProvider {
         networkManager: NetworkManager,
         rpcSource: RpcSource,
         contractAddress: Address
-    ) async throws -> Int {
+    ) async throws
+        -> Int {
         let data = try await EvmKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,

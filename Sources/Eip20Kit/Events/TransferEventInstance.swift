@@ -1,8 +1,7 @@
 //
 //  TransferEventInstance.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2021/6/17.
 //
 
 import Foundation
@@ -13,13 +12,19 @@ import EvmKit
 // MARK: - TransferEventInstance
 
 public class TransferEventInstance: ContractEventInstance {
+    // MARK: Static Properties
+
     static let signature = ContractEvent(name: "Transfer", arguments: [.address, .address, .uint256]).signature
+
+    // MARK: Properties
 
     public let from: Address
     public let to: Address
     public let value: BigUInt
 
     public let tokenInfo: TokenInfo?
+
+    // MARK: Lifecycle
 
     init(contractAddress: Address, from: Address, to: Address, value: BigUInt, tokenInfo: TokenInfo? = nil) {
         self.from = from
@@ -30,11 +35,18 @@ public class TransferEventInstance: ContractEventInstance {
         super.init(contractAddress: contractAddress)
     }
 
+    // MARK: Overridden Functions
+
     override public func tags(userAddress: Address) -> [TransactionTag] {
         var tags = [TransactionTag]()
 
         if from == userAddress {
-            tags.append(TransactionTag(type: .outgoing, protocol: .eip20, contractAddress: contractAddress, addresses: [to.hex]))
+            tags.append(TransactionTag(
+                type: .outgoing,
+                protocol: .eip20,
+                contractAddress: contractAddress,
+                addresses: [to.hex]
+            ))
         }
 
         if to == userAddress {

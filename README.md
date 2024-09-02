@@ -24,7 +24,7 @@ let evmKit = try Kit.instance(
 	chain: .ethereum,
 	rpcSource: .ethereumInfuraWebsocket(projectId: "...", projectSecret: "..."),
 	transactionSource: .ethereumEtherscan(apiKey: "..."),
-	walletId: "unique_wallet_id",
+	walletID: "unique_wallet_id",
 	minLogLevel: .error
 )
 
@@ -137,11 +137,11 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
     .disposed(by: disposeBag)
 ```
 
-## Prerequisites
+## Requirements
 
-* Xcode 15.0+
+* Xcode 15.4+
 * Swift 5.10+
-* iOS 14+
+* iOS 14.0+
 
 ## Installation
 
@@ -149,7 +149,7 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.1.7"))
+    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.2.0"))
 ]
 ```
 

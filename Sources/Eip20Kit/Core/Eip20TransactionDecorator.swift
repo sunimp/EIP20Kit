@@ -1,8 +1,7 @@
 //
 //  Eip20TransactionDecorator.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2021/3/4.
 //
 
 import Foundation
@@ -13,7 +12,11 @@ import EvmKit
 // MARK: - Eip20TransactionDecorator
 
 class Eip20TransactionDecorator {
+    // MARK: Properties
+
     private let userAddress: Address
+
+    // MARK: Lifecycle
 
     init(userAddress: Address) {
         self.userAddress = userAddress
@@ -30,7 +33,8 @@ extension Eip20TransactionDecorator: ITransactionDecorator {
         contractMethod: ContractMethod?,
         internalTransactions _: [InternalTransaction],
         eventInstances: [ContractEventInstance]
-    ) -> TransactionDecoration? {
+    )
+        -> TransactionDecoration? {
         guard let from, let to, let contractMethod else {
             return nil
         }
@@ -42,7 +46,8 @@ extension Eip20TransactionDecorator: ITransactionDecorator {
                     to: transferMethod.to,
                     value: transferMethod.value,
                     sentToSelf: transferMethod.to == userAddress,
-                    tokenInfo: eventInstances.compactMap { $0 as? TransferEventInstance }.first { $0.contractAddress == to }?
+                    tokenInfo: eventInstances.compactMap { $0 as? TransferEventInstance }
+                        .first { $0.contractAddress == to }?
                         .tokenInfo
                 )
             }

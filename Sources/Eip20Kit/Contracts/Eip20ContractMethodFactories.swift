@@ -1,8 +1,7 @@
 //
 //  Eip20ContractMethodFactories.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2021/3/4.
 //
 
 import Foundation
@@ -10,7 +9,11 @@ import Foundation
 import EvmKit
 
 class Eip20ContractMethodFactories: ContractMethodFactories {
+    // MARK: Static Properties
+
     static let shared = Eip20ContractMethodFactories()
+
+    // MARK: Lifecycle
 
     override init() {
         super.init()

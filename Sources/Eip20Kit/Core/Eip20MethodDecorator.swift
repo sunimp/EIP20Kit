@@ -1,8 +1,7 @@
 //
 //  Eip20MethodDecorator.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2022/4/7.
 //
 
 import Foundation
@@ -12,7 +11,11 @@ import EvmKit
 // MARK: - Eip20MethodDecorator
 
 class Eip20MethodDecorator {
+    // MARK: Properties
+
     private let contractMethodFactories: ContractMethodFactories
+
+    // MARK: Lifecycle
 
     init(contractMethodFactories: ContractMethodFactories) {
         self.contractMethodFactories = contractMethodFactories

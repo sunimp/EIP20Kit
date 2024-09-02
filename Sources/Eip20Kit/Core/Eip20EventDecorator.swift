@@ -1,8 +1,7 @@
 //
 //  Eip20EventDecorator.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2022/4/7.
 //
 
 import Foundation
@@ -12,8 +11,12 @@ import EvmKit
 // MARK: - Eip20EventDecorator
 
 class Eip20EventDecorator {
+    // MARK: Properties
+
     private let userAddress: Address
     private let storage: Eip20Storage
+
+    // MARK: Lifecycle
 
     init(userAddress: Address, storage: Eip20Storage) {
         self.userAddress = userAddress
@@ -42,7 +45,11 @@ extension Eip20EventDecorator: IEventDecorator {
                 from: event.from,
                 to: event.to,
                 value: event.value,
-                tokenInfo: TokenInfo(tokenName: event.tokenName, tokenSymbol: event.tokenSymbol, tokenDecimal: event.tokenDecimal)
+                tokenInfo: TokenInfo(
+                    tokenName: event.tokenName,
+                    tokenSymbol: event.tokenSymbol,
+                    tokenDecimal: event.tokenDecimal
+                )
             )
 
             map[event.hash] = (map[event.hash] ?? []) + [eventInstance]

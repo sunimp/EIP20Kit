@@ -1,8 +1,7 @@
 //
 //  AllowanceManager.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2020/7/28.
 //
 
 import Foundation
@@ -20,15 +19,21 @@ enum AllowanceParsingError: Error {
 // MARK: - AllowanceManager
 
 class AllowanceManager {
+    // MARK: Properties
+
     private let evmKit: EvmKit.Kit
     private let contractAddress: Address
     private let address: Address
+
+    // MARK: Lifecycle
 
     init(evmKit: EvmKit.Kit, contractAddress: Address, address: Address) {
         self.evmKit = evmKit
         self.contractAddress = contractAddress
         self.address = address
     }
+
+    // MARK: Functions
 
     func allowance(spenderAddress: Address, defaultBlockParameter: DefaultBlockParameter) async throws -> BigUInt {
         let methodData = AllowanceMethod(owner: address, spender: spenderAddress).encodedABI()

@@ -1,8 +1,7 @@
 //
 //  Eip20TransactionSyncer.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2021/1/5.
 //
 
 import Foundation
@@ -13,13 +12,19 @@ import EvmKit
 // MARK: - Eip20TransactionSyncer
 
 class Eip20TransactionSyncer {
+    // MARK: Properties
+
     private let provider: ITransactionProvider
     private let storage: Eip20Storage
+
+    // MARK: Lifecycle
 
     init(provider: ITransactionProvider, storage: Eip20Storage) {
         self.provider = provider
         self.storage = storage
     }
+
+    // MARK: Functions
 
     private func handle(transactions: [ProviderTokenTransaction]) {
         guard !transactions.isEmpty else {

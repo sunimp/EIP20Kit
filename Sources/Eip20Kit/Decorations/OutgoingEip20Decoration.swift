@@ -1,8 +1,7 @@
 //
 //  OutgoingEip20Decoration.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2022/4/7.
 //
 
 import Foundation
@@ -11,11 +10,15 @@ import BigInt
 import EvmKit
 
 public class OutgoingEip20Decoration: TransactionDecoration {
+    // MARK: Properties
+
     public let contractAddress: Address
     public let to: Address
     public let value: BigUInt
     public let sentToSelf: Bool
     public let tokenInfo: TokenInfo?
+
+    // MARK: Lifecycle
 
     init(contractAddress: Address, to: Address, value: BigUInt, sentToSelf: Bool, tokenInfo: TokenInfo?) {
         self.contractAddress = contractAddress
@@ -26,6 +29,8 @@ public class OutgoingEip20Decoration: TransactionDecoration {
 
         super.init()
     }
+
+    // MARK: Overridden Functions
 
     override public func tags() -> [TransactionTag] {
         [

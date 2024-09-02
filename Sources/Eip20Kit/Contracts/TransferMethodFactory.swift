@@ -1,8 +1,7 @@
 //
 //  TransferMethodFactory.swift
-//  Eip20Kit
 //
-//  Created by Sun on 2024/8/21.
+//  Created by Sun on 2020/9/22.
 //
 
 import Foundation
@@ -11,7 +10,11 @@ import BigInt
 import EvmKit
 
 class TransferMethodFactory: IContractMethodFactory {
-    let methodId: Data = ContractMethodHelper.methodId(signature: TransferMethod.methodSignature)
+    // MARK: Properties
+
+    let methodID: Data = ContractMethodHelper.methodID(signature: TransferMethod.methodSignature)
+
+    // MARK: Functions
 
     func createMethod(inputArguments: Data) throws -> ContractMethod {
         let to = Address(raw: inputArguments[12 ..< 32])
