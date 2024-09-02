@@ -1,6 +1,6 @@
 //
 //  BalanceController.swift
-//  Eip20Kit-Example
+//  EIP20Kit-Demo
 //
 //  Created by Sun on 2024/8/21.
 //
@@ -8,12 +8,12 @@
 import UIKit
 import Combine
 
-import EvmKit
+import EVMKit
 import SnapKit
 import UIExtensions
 
 class BalanceController: UIViewController {
-    private let adapter: Eip20Adapter = Manager.shared.adapter
+    private let adapter: EIP20Adapter = Manager.shared.adapter
     private var cancellables = Set<AnyCancellable>()
 
     private let titlesLabel = UILabel()

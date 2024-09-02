@@ -1,25 +1,25 @@
 //
-//  Eip20TransactionSyncer.swift
+//  EIP20TransactionSyncer.swift
 //
-//  Created by Sun on 2021/1/5.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 
-// MARK: - Eip20TransactionSyncer
+// MARK: - EIP20TransactionSyncer
 
-class Eip20TransactionSyncer {
+class EIP20TransactionSyncer {
     // MARK: Properties
 
     private let provider: ITransactionProvider
-    private let storage: Eip20Storage
+    private let storage: EIP20Storage
 
     // MARK: Lifecycle
 
-    init(provider: ITransactionProvider, storage: Eip20Storage) {
+    init(provider: ITransactionProvider, storage: EIP20Storage) {
         self.provider = provider
         self.storage = storage
     }
@@ -51,7 +51,7 @@ class Eip20TransactionSyncer {
 
 // MARK: ITransactionSyncer
 
-extension Eip20TransactionSyncer: ITransactionSyncer {
+extension EIP20TransactionSyncer: ITransactionSyncer {
     func transactions() async throws -> ([Transaction], Bool) {
         let lastBlockNumber = storage.lastEvent()?.blockNumber ?? 0
         let initial = lastBlockNumber == 0

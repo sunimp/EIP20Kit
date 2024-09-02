@@ -1,17 +1,17 @@
 //
-//  Eip20ContractMethodFactories.swift
+//  EIP20ContractMethodFactories.swift
 //
-//  Created by Sun on 2021/3/4.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
-import EvmKit
+import EVMKit
 
-class Eip20ContractMethodFactories: ContractMethodFactories {
+class EIP20ContractMethodFactories: ContractMethodFactories {
     // MARK: Static Properties
 
-    static let shared = Eip20ContractMethodFactories()
+    static let shared = EIP20ContractMethodFactories()
 
     // MARK: Lifecycle
 

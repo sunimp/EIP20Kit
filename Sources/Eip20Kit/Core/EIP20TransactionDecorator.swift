@@ -1,17 +1,17 @@
 //
-//  Eip20TransactionDecorator.swift
+//  EIP20TransactionDecorator.swift
 //
-//  Created by Sun on 2021/3/4.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 
-// MARK: - Eip20TransactionDecorator
+// MARK: - EIP20TransactionDecorator
 
-class Eip20TransactionDecorator {
+class EIP20TransactionDecorator {
     // MARK: Properties
 
     private let userAddress: Address
@@ -25,7 +25,7 @@ class Eip20TransactionDecorator {
 
 // MARK: ITransactionDecorator
 
-extension Eip20TransactionDecorator: ITransactionDecorator {
+extension EIP20TransactionDecorator: ITransactionDecorator {
     public func decoration(
         from: Address?,
         to: Address?,
@@ -41,7 +41,7 @@ extension Eip20TransactionDecorator: ITransactionDecorator {
 
         if let transferMethod = contractMethod as? TransferMethod {
             if from == userAddress {
-                return OutgoingEip20Decoration(
+                return OutgoingEIP20Decoration(
                     contractAddress: to,
                     to: transferMethod.to,
                     value: transferMethod.value,
@@ -54,7 +54,7 @@ extension Eip20TransactionDecorator: ITransactionDecorator {
         }
 
         if let approveMethod = contractMethod as? ApproveMethod {
-            return ApproveEip20Decoration(
+            return ApproveEIP20Decoration(
                 contractAddress: to,
                 spender: approveMethod.spender,
                 value: approveMethod.value

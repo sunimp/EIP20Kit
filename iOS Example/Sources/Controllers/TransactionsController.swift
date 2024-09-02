@@ -1,6 +1,6 @@
 //
 //  TransactionsController.swift
-//  Eip20Kit-Example
+//  EIP20Kit-Demo
 //
 //  Created by Sun on 2024/8/21.
 //
@@ -13,7 +13,7 @@ import UIExtensions
 class TransactionsController: UITableViewController {
     private let limit = 20
 
-    private let adapter: Eip20Adapter = Manager.shared.adapter
+    private let adapter: EIP20Adapter = Manager.shared.adapter
     private var cancellables = Set<AnyCancellable>()
 
     private var transactions = [TransactionRecord]()

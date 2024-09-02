@@ -1,20 +1,20 @@
 import BigInt
 import Combine
-import Eip20Kit
-import EvmKit
+import EIP20Kit
+import EVMKit
 import Foundation
 import WWExtensions
 
-class Eip20Adapter {
-    private let evmKit: EvmKit.Kit
+class EIP20Adapter {
+    private let evmKit: EVMKit.Kit
     private let signer: Signer?
-    private let eip20Kit: Eip20Kit.Kit
-    private let token: Eip20Token
+    private let eip20Kit: EIP20Kit.Kit
+    private let token: EIP20Token
 
-    init(evmKit: EvmKit.Kit, signer: Signer?, token: Eip20Token) throws {
+    init(evmKit: EVMKit.Kit, signer: Signer?, token: EIP20Token) throws {
         self.evmKit = evmKit
         self.signer = signer
-        eip20Kit = try Eip20Kit.Kit.instance(evmKit: evmKit, contractAddress: token.contractAddress)
+        eip20Kit = try EIP20Kit.Kit.instance(evmKit: evmKit, contractAddress: token.contractAddress)
         self.token = token
     }
 
@@ -43,7 +43,7 @@ class Eip20Adapter {
     }
 }
 
-extension Eip20Adapter {
+extension EIP20Adapter {
     func start() {
         eip20Kit.start()
     }
@@ -68,19 +68,19 @@ extension Eip20Adapter {
         evmKit.lastBlockHeight
     }
 
-    var syncState: EvmKit.SyncState {
+    var syncState: EVMKit.SyncState {
         switch eip20Kit.syncState {
-        case .synced: return EvmKit.SyncState.synced
-        case .syncing: return EvmKit.SyncState.syncing(progress: nil)
-        case let .notSynced(error): return EvmKit.SyncState.notSynced(error: error)
+        case .synced: return EVMKit.SyncState.synced
+        case .syncing: return EVMKit.SyncState.syncing(progress: nil)
+        case let .notSynced(error): return EVMKit.SyncState.notSynced(error: error)
         }
     }
 
-    var transactionsSyncState: EvmKit.SyncState {
+    var transactionsSyncState: EVMKit.SyncState {
         switch eip20Kit.transactionsSyncState {
-        case .synced: return EvmKit.SyncState.synced
-        case .syncing: return EvmKit.SyncState.syncing(progress: nil)
-        case let .notSynced(error): return EvmKit.SyncState.notSynced(error: error)
+        case .synced: return EVMKit.SyncState.synced
+        case .syncing: return EVMKit.SyncState.syncing(progress: nil)
+        case let .notSynced(error): return EVMKit.SyncState.notSynced(error: error)
         }
     }
 
@@ -163,7 +163,7 @@ extension Eip20Adapter {
     }
 }
 
-extension Eip20Adapter {
+extension EIP20Adapter {
     enum SendError: Error {
         case noSigner
     }

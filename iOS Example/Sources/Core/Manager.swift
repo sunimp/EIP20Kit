@@ -1,18 +1,18 @@
-import Eip20Kit
-import EvmKit
+import EIP20Kit
+import EVMKit
 import Foundation
 import HDWalletKit
 
 class Manager {
     static let shared = Manager()
 
-    let token = Eip20Token(
+    let token = EIP20Token(
         name: "DAI Stablecoin",
         code: "DAI",
         contractAddress: try! Address(hex: "0x6B175474E89094C44Da98b954EedeAC495271d0F"),
         decimal: 18
     )
-//    let token = Eip20Token(
+//    let token = EIP20Token(
 //            name: "Tether USD",
 //            code: "USDT",
 //            contractAddress: try! Address(hex: "0xdAC17F958D2ee523a2206206994597C13D831ec7"),
@@ -22,9 +22,9 @@ class Manager {
     private let keyWords = "mnemonic_words"
     private let keyAddress = "address"
 
-    var evmKit: EvmKit.Kit!
+    var evmKit: EVMKit.Kit!
     var signer: Signer!
-    var adapter: Eip20Adapter!
+    var adapter: EIP20Adapter!
 
     init() {
         if let words = savedWords {
@@ -35,7 +35,7 @@ class Manager {
     }
 
     private func initKit(address: Address, configuration: Configuration, signer: Signer?) throws {
-        let evmKit = try EvmKit.Kit.instance(
+        let evmKit = try EVMKit.Kit.instance(
             address: address,
             chain: configuration.chain,
             rpcSource: configuration.rpcSource,
@@ -44,10 +44,10 @@ class Manager {
             minLogLevel: configuration.minLogLevel
         )
 
-        adapter = try Eip20Adapter(evmKit: evmKit, signer: signer, token: token)
+        adapter = try EIP20Adapter(evmKit: evmKit, signer: signer, token: token)
 
-        Eip20Kit.Kit.addDecorators(to: evmKit)
-        Eip20Kit.Kit.addTransactionSyncer(to: evmKit)
+        EIP20Kit.Kit.addDecorators(to: evmKit)
+        EIP20Kit.Kit.addTransactionSyncer(to: evmKit)
 
         self.evmKit = evmKit
         self.signer = signer
@@ -141,7 +141,7 @@ extension Manager {
     }
 }
 
-struct Eip20Token {
+struct EIP20Token {
     let name: String
     let code: String
     let contractAddress: Address

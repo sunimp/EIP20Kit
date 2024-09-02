@@ -1,6 +1,6 @@
-# Eip20Kit.Swift
+# EIP20Kit.Swift
 
-`Eip20Kit.Swift` is an extension to `EvmKit.Swift` that implements `Eip20` token standard. 
+`EIP20Kit.Swift` is an extension to `EVMKit.Swift` that implements `EIP20` token standard. 
 
 ## Features
 
@@ -13,14 +13,14 @@
 ### Initialization
 
 ```swift
-import EvmKit
-import Eip20Kit
+import EVMKit
+import EIP20Kit
 import HdWalletKit
 
-let contractAddress = try EvmKit.Address(hex: "0x..token..contract..address..")
+let contractAddress = try EVMKit.Address(hex: "0x..token..contract..address..")
 
 let evmKit = try Kit.instance(
-	address: try EvmKit.Address(hex: "0x..user..address.."),
+	address: try EVMKit.Address(hex: "0x..user..address.."),
 	chain: .ethereum,
 	rpcSource: .ethereumInfuraWebsocket(projectId: "...", projectSecret: "..."),
 	transactionSource: .ethereumEtherscan(apiKey: "..."),
@@ -28,16 +28,16 @@ let evmKit = try Kit.instance(
 	minLogLevel: .error
 )
 
-let eip20Kit = try Eip20Kit.Kit.instance(
+let eip20Kit = try EIP20Kit.Kit.instance(
 	evmKit: evmKit, 
 	contractAddress: contractAddress
 )
 
-// Decorators are needed to detect transactions as `Eip20` transfer/approve transactions
-Eip20Kit.Kit.addDecorators(to: evmKit)
+// Decorators are needed to detect transactions as `EIP20` transfer/approve transactions
+EIP20Kit.Kit.addDecorators(to: evmKit)
 
-// Eip20 transactions syncer is needed to pull Eip20 transfer transactions from Etherscan
-Eip20Kit.Kit.addTransactionSyncer(to: evmKit)
+// EIP20 transactions syncer is needed to pull EIP20 transfer transactions from Etherscan
+EIP20Kit.Kit.addTransactionSyncer(to: evmKit)
 ```
 
 
@@ -52,14 +52,14 @@ print("Balance: \(balance.description)")
 
 ```
 
-### Send `Eip20` Transaction
+### Send `EIP20` Transaction
 
 ```swift
 // Get Signer object
 let seed = Mnemonic.seed(mnemonic: ["mnemonic", "words", ...])!
 let signer = try Signer.instance(seed: seed, chain: .ethereum)
 
-let to = try EvmKit.Address(hex: "0x..recipient..adress..here")
+let to = try EVMKit.Address(hex: "0x..recipient..adress..here")
 let amount = BigUInt("100000000000000000")
 let gasPrice = GasPrice.legacy(gasPrice: 50_000_000_000)
 
@@ -90,7 +90,7 @@ sendSingle
     .subscribe(
         onSuccess: { fullTransaction in
             // sendSingle returns FullTransaction object which contains transaction, and a transaction decoration
-            // Eip20Kit.Swift kit creates a OutgoingDecoration decoration for transfer method transaction
+            // EIP20Kit.Swift kit creates a OutgoingDecoration decoration for transfer method transaction
 
             let transaction = fullTransaction.transaction
             print("Transaction sent: \(transaction.hash.ww.hexString)")
@@ -149,11 +149,11 @@ evmKit.transactionsSingle(tagQueries: [TransactionTagQuery(protocol: .eip20, con
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/sunimp/Eip20Kit.Swift.git", .upToNextMajor(from: "2.2.0"))
+    .package(url: "https://github.com/sunimp/EIP20Kit.Swift.git", .upToNextMajor(from: "2.2.0"))
 ]
 ```
 
 ## License
 
-The `Eip20Kit.Swift` toolkit is open source and available under the terms of the [MIT License](https://github.com/sunimp/Eip20Kit.Swift/blob/master/LICENSE).
+The `EIP20Kit.Swift` toolkit is open source and available under the terms of the [MIT License](https://github.com/sunimp/EIP20Kit.Swift/blob/main/LICENSE).
 

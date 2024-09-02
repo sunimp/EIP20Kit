@@ -1,13 +1,13 @@
 //
 //  BalanceManager.swift
 //
-//  Created by Sun on 2019/4/18.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 import WWExtensions
 
 // MARK: - BalanceManager
@@ -17,7 +17,7 @@ class BalanceManager {
 
     weak var delegate: IBalanceManagerDelegate?
 
-    private let storage: Eip20Storage
+    private let storage: EIP20Storage
     private let contractAddress: Address
     private let address: Address
     private let dataProvider: IDataProvider
@@ -25,7 +25,7 @@ class BalanceManager {
 
     // MARK: Lifecycle
 
-    init(storage: Eip20Storage, contractAddress: Address, address: Address, dataProvider: IDataProvider) {
+    init(storage: EIP20Storage, contractAddress: Address, address: Address, dataProvider: IDataProvider) {
         self.storage = storage
         self.contractAddress = contractAddress
         self.address = address

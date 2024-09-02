@@ -1,24 +1,24 @@
 //
-//  Eip20EventDecorator.swift
+//  EIP20EventDecorator.swift
 //
-//  Created by Sun on 2022/4/7.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
-import EvmKit
+import EVMKit
 
-// MARK: - Eip20EventDecorator
+// MARK: - EIP20EventDecorator
 
-class Eip20EventDecorator {
+class EIP20EventDecorator {
     // MARK: Properties
 
     private let userAddress: Address
-    private let storage: Eip20Storage
+    private let storage: EIP20Storage
 
     // MARK: Lifecycle
 
-    init(userAddress: Address, storage: Eip20Storage) {
+    init(userAddress: Address, storage: EIP20Storage) {
         self.userAddress = userAddress
         self.storage = storage
     }
@@ -26,7 +26,7 @@ class Eip20EventDecorator {
 
 // MARK: IEventDecorator
 
-extension Eip20EventDecorator: IEventDecorator {
+extension EIP20EventDecorator: IEventDecorator {
     public func contractEventInstancesMap(transactions: [Transaction]) -> [Data: [ContractEventInstance]] {
         let events: [Event]
 

@@ -1,13 +1,13 @@
 //
 //  DataProvider.swift
 //
-//  Created by Sun on 2019/4/12.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 import WWExtensions
 import WWToolKit
 
@@ -16,11 +16,11 @@ import WWToolKit
 public class DataProvider {
     // MARK: Properties
 
-    private let evmKit: EvmKit.Kit
+    private let evmKit: EVMKit.Kit
 
     // MARK: Lifecycle
 
-    public init(evmKit: EvmKit.Kit) {
+    public init(evmKit: EVMKit.Kit) {
         self.evmKit = evmKit
     }
 }
@@ -35,7 +35,7 @@ extension DataProvider: IDataProvider {
         )
 
         guard let value = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         return value
@@ -49,7 +49,7 @@ extension DataProvider {
         contractAddress: Address
     ) async throws
         -> String {
-        let data = try await EvmKit.Kit.call(
+        let data = try await EVMKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,
             contractAddress: contractAddress,
@@ -57,7 +57,7 @@ extension DataProvider {
         )
 
         guard !data.isEmpty else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         let parsedArguments = ContractMethodHelper.decodeABI(inputArguments: data, argumentTypes: [Data.self])
@@ -67,7 +67,7 @@ extension DataProvider {
         }
 
         guard let string = String(data: stringData, encoding: .utf8) else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         return string
@@ -79,7 +79,7 @@ extension DataProvider {
         contractAddress: Address
     ) async throws
         -> String {
-        let data = try await EvmKit.Kit.call(
+        let data = try await EVMKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,
             contractAddress: contractAddress,
@@ -87,7 +87,7 @@ extension DataProvider {
         )
 
         guard !data.isEmpty else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         let parsedArguments = ContractMethodHelper.decodeABI(inputArguments: data, argumentTypes: [Data.self])
@@ -97,7 +97,7 @@ extension DataProvider {
         }
 
         guard let string = String(data: stringData, encoding: .utf8) else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         return string
@@ -109,7 +109,7 @@ extension DataProvider {
         contractAddress: Address
     ) async throws
         -> Int {
-        let data = try await EvmKit.Kit.call(
+        let data = try await EVMKit.Kit.call(
             networkManager: networkManager,
             rpcSource: rpcSource,
             contractAddress: contractAddress,
@@ -117,15 +117,15 @@ extension DataProvider {
         )
 
         guard !data.isEmpty else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         guard let bigIntValue = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         guard let value = Int(bigIntValue.description) else {
-            throw Eip20Kit.TokenError.invalidHex
+            throw EIP20Kit.TokenError.invalidHex
         }
 
         return value

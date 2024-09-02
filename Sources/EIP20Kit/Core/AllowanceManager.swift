@@ -1,13 +1,13 @@
 //
 //  AllowanceManager.swift
 //
-//  Created by Sun on 2020/7/28.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 import WWCryptoKit
 
 // MARK: - AllowanceParsingError
@@ -21,13 +21,13 @@ enum AllowanceParsingError: Error {
 class AllowanceManager {
     // MARK: Properties
 
-    private let evmKit: EvmKit.Kit
+    private let evmKit: EVMKit.Kit
     private let contractAddress: Address
     private let address: Address
 
     // MARK: Lifecycle
 
-    init(evmKit: EvmKit.Kit, contractAddress: Address, address: Address) {
+    init(evmKit: EVMKit.Kit, contractAddress: Address, address: Address) {
         self.evmKit = evmKit
         self.contractAddress = contractAddress
         self.address = address

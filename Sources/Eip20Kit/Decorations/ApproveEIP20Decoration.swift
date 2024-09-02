@@ -1,15 +1,15 @@
 //
-//  ApproveEip20Decoration.swift
+//  ApproveEIP20Decoration.swift
 //
-//  Created by Sun on 2022/4/7.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 
-public class ApproveEip20Decoration: TransactionDecoration {
+public class ApproveEIP20Decoration: TransactionDecoration {
     // MARK: Properties
 
     public let contractAddress: Address

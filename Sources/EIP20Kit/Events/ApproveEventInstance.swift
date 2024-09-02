@@ -1,13 +1,13 @@
 //
 //  ApproveEventInstance.swift
 //
-//  Created by Sun on 2021/6/3.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 
 public class ApproveEventInstance: ContractEventInstance {
     // MARK: Static Properties

@@ -1,14 +1,14 @@
 //
 //  Kit.swift
 //
-//  Created by Sun on 2019/4/10.
+//  Created by Sun on 2024/9/2.
 //
 
 import Combine
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 import WWToolKit
 
 // MARK: - Kit
@@ -19,7 +19,7 @@ public class Kit {
     private var cancellables = Set<AnyCancellable>()
 
     private let contractAddress: Address
-    private let evmKit: EvmKit.Kit
+    private let evmKit: EVMKit.Kit
     private let transactionManager: ITransactionManager
     private let balanceManager: IBalanceManager
     private let allowanceManager: AllowanceManager
@@ -30,7 +30,7 @@ public class Kit {
 
     init(
         contractAddress: Address,
-        evmKit: EvmKit.Kit,
+        evmKit: EVMKit.Kit,
         transactionManager: ITransactionManager,
         balanceManager: IBalanceManager,
         allowanceManager: AllowanceManager,
@@ -61,7 +61,7 @@ public class Kit {
 
     // MARK: Functions
 
-    private func onUpdateSyncState(syncState: EvmKit.SyncState) {
+    private func onUpdateSyncState(syncState: EVMKit.SyncState) {
         switch syncState {
         case .synced:
             state.syncState = .syncing(progress: nil)
@@ -158,14 +158,14 @@ extension Kit: IBalanceManagerDelegate {
 }
 
 extension Kit {
-    public static func instance(evmKit: EvmKit.Kit, contractAddress: Address) throws -> Kit {
+    public static func instance(evmKit: EVMKit.Kit, contractAddress: Address) throws -> Kit {
         let address = evmKit.address
 
         let dataProvider: IDataProvider = DataProvider(evmKit: evmKit)
         let transactionManager = TransactionManager(
             evmKit: evmKit,
             contractAddress: contractAddress,
-            contractMethodFactories: Eip20ContractMethodFactories.shared
+            contractMethodFactories: EIP20ContractMethodFactories.shared
         )
         let balanceManager = BalanceManager(
             storage: evmKit.eip20Storage,
@@ -188,15 +188,15 @@ extension Kit {
         return kit
     }
 
-    public static func addTransactionSyncer(to evmKit: EvmKit.Kit) {
-        let syncer = Eip20TransactionSyncer(provider: evmKit.transactionProvider, storage: evmKit.eip20Storage)
+    public static func addTransactionSyncer(to evmKit: EVMKit.Kit) {
+        let syncer = EIP20TransactionSyncer(provider: evmKit.transactionProvider, storage: evmKit.eip20Storage)
         evmKit.add(transactionSyncer: syncer)
     }
 
-    public static func addDecorators(to evmKit: EvmKit.Kit) {
-        evmKit.add(methodDecorator: Eip20MethodDecorator(contractMethodFactories: Eip20ContractMethodFactories.shared))
-        evmKit.add(eventDecorator: Eip20EventDecorator(userAddress: evmKit.address, storage: evmKit.eip20Storage))
-        evmKit.add(transactionDecorator: Eip20TransactionDecorator(userAddress: evmKit.address))
+    public static func addDecorators(to evmKit: EVMKit.Kit) {
+        evmKit.add(methodDecorator: EIP20MethodDecorator(contractMethodFactories: EIP20ContractMethodFactories.shared))
+        evmKit.add(eventDecorator: EIP20EventDecorator(userAddress: evmKit.address, storage: evmKit.eip20Storage))
+        evmKit.add(transactionDecorator: EIP20TransactionDecorator(userAddress: evmKit.address))
     }
 }
 

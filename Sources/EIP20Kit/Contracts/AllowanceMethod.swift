@@ -1,12 +1,12 @@
 //
 //  AllowanceMethod.swift
 //
-//  Created by Sun on 2020/9/22.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
-import EvmKit
+import EVMKit
 
 class AllowanceMethod: ContractMethod {
     // MARK: Overridden Properties

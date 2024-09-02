@@ -1,7 +1,7 @@
 //
 //  TransactionType.swift
 //
-//  Created by Sun on 2021/1/8.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation

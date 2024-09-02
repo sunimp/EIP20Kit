@@ -1,6 +1,6 @@
 //
 //  SendController.swift
-//  Eip20Kit-Example
+//  EIP20Kit-Demo
 //
 //  Created by Sun on 2024/8/21.
 //
@@ -8,11 +8,11 @@
 import UIKit
 import Combine
 
-import EvmKit
+import EVMKit
 import SnapKit
 
 class SendController: UIViewController {
-    private let adapter: Eip20Adapter = Manager.shared.adapter
+    private let adapter: EIP20Adapter = Manager.shared.adapter
     private let feeHistoryProvider = EIP1559GasPriceProvider(evmKit: Manager.shared.evmKit)
     private var gasPrice = GasPrice.legacy(gasPrice: 50_000_000_000)
     private var estimateGasLimit: Int?

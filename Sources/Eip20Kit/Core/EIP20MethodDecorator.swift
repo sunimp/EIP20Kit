@@ -1,16 +1,16 @@
 //
-//  Eip20MethodDecorator.swift
+//  EIP20MethodDecorator.swift
 //
-//  Created by Sun on 2022/4/7.
+//  Created by Sun on 2024/9/2.
 //
 
 import Foundation
 
-import EvmKit
+import EVMKit
 
-// MARK: - Eip20MethodDecorator
+// MARK: - EIP20MethodDecorator
 
-class Eip20MethodDecorator {
+class EIP20MethodDecorator {
     // MARK: Properties
 
     private let contractMethodFactories: ContractMethodFactories
@@ -24,7 +24,7 @@ class Eip20MethodDecorator {
 
 // MARK: IMethodDecorator
 
-extension Eip20MethodDecorator: IMethodDecorator {
+extension EIP20MethodDecorator: IMethodDecorator {
     public func contractMethod(input: Data) -> ContractMethod? {
         contractMethodFactories.createMethod(input: input)
     }

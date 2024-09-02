@@ -1,13 +1,13 @@
 //
 //  Configuration.swift
-//  Eip20Kit-Example
+//  EIP20Kit-Demo
 //
 //  Created by Sun on 2024/8/21.
 //
 
 import Foundation
 
-import EvmKit
+import EVMKit
 import WWToolKit
 
 class Configuration {

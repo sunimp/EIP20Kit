@@ -1,14 +1,14 @@
 //
 //  TransactionManager.swift
 //
-//  Created by Sun on 2019/4/18.
+//  Created by Sun on 2024/9/2.
 //
 
 import Combine
 import Foundation
 
 import BigInt
-import EvmKit
+import EVMKit
 
 // MARK: - TransactionManager
 
@@ -17,9 +17,9 @@ class TransactionManager {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let evmKit: EvmKit.Kit
+    private let evmKit: EVMKit.Kit
     private let contractAddress: Address
-    private let contractMethodFactories: Eip20ContractMethodFactories
+    private let contractMethodFactories: EIP20ContractMethodFactories
     private let address: Address
     private let tagQueries: [TransactionTagQuery]
 
@@ -33,7 +33,7 @@ class TransactionManager {
 
     // MARK: Lifecycle
 
-    init(evmKit: EvmKit.Kit, contractAddress: Address, contractMethodFactories: Eip20ContractMethodFactories) {
+    init(evmKit: EVMKit.Kit, contractAddress: Address, contractMethodFactories: EIP20ContractMethodFactories) {
         self.evmKit = evmKit
         self.contractAddress = contractAddress
         self.contractMethodFactories = contractMethodFactories
