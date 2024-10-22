@@ -1,7 +1,8 @@
 //
 //  Kit.swift
+//  EIP20Kit
 //
-//  Created by Sun on 2024/9/2.
+//  Created by Sun on 2019/4/10.
 //
 
 import Combine
@@ -9,7 +10,7 @@ import Foundation
 
 import BigInt
 import EVMKit
-import WWToolKit
+import SWToolKit
 
 // MARK: - Kit
 

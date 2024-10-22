@@ -1,15 +1,16 @@
 //
 //  DataProvider.swift
+//  EIP20Kit
 //
-//  Created by Sun on 2024/9/2.
+//  Created by Sun on 2019/4/12.
 //
 
 import Foundation
 
 import BigInt
 import EVMKit
-import WWExtensions
-import WWToolKit
+import SWExtensions
+import SWToolKit
 
 // MARK: - DataProvider
 
@@ -34,7 +35,7 @@ extension DataProvider: IDataProvider {
             data: BalanceOfMethod(owner: address).encodedABI()
         )
 
-        guard let value = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
+        guard let value = BigUInt(data.prefix(32).sw.hex, radix: 16) else {
             throw EIP20Kit.TokenError.invalidHex
         }
 
@@ -120,7 +121,7 @@ extension DataProvider {
             throw EIP20Kit.TokenError.invalidHex
         }
 
-        guard let bigIntValue = BigUInt(data.prefix(32).ww.hex, radix: 16) else {
+        guard let bigIntValue = BigUInt(data.prefix(32).sw.hex, radix: 16) else {
             throw EIP20Kit.TokenError.invalidHex
         }
 

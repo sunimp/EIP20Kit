@@ -1,7 +1,8 @@
 //
 //  BalanceOfMethod.swift
+//  EIP20Kit
 //
-//  Created by Sun on 2024/9/2.
+//  Created by Sun on 2020/9/22.
 //
 
 import Foundation

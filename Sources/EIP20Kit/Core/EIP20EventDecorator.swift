@@ -1,5 +1,6 @@
 //
 //  EIP20EventDecorator.swift
+//  EIP20Kit
 //
 //  Created by Sun on 2024/9/2.
 //

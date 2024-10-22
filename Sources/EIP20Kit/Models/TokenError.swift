@@ -1,7 +1,8 @@
 //
 //  TokenError.swift
+//  EIP20Kit
 //
-//  Created by Sun on 2024/9/2.
+//  Created by Sun on 2019/11/26.
 //
 
 import Foundation

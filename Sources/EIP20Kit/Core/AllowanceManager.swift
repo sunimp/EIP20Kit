@@ -1,14 +1,15 @@
 //
 //  AllowanceManager.swift
+//  EIP20Kit
 //
-//  Created by Sun on 2024/9/2.
+//  Created by Sun on 2020/7/28.
 //
 
 import Foundation
 
 import BigInt
 import EVMKit
-import WWCryptoKit
+import SWCryptoKit
 
 // MARK: - AllowanceParsingError
 

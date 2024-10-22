@@ -3,7 +3,7 @@ import Combine
 import EIP20Kit
 import EVMKit
 import Foundation
-import WWExtensions
+import SWExtensions
 
 class EIP20Adapter {
     private let evmKit: EVMKit.Kit
@@ -28,14 +28,14 @@ class EIP20Adapter {
         }
 
         return TransactionRecord(
-            transactionHash: transaction.hash.ww.hexString,
+            transactionHash: transaction.hash.sw.hexString,
             transactionHashData: transaction.hash,
             timestamp: transaction.timestamp,
             isFailed: transaction.isFailed,
             from: transaction.from,
             to: transaction.to,
             amount: amount,
-            input: transaction.input.map(\.ww.hexString),
+            input: transaction.input.map(\.sw.hexString),
             blockHeight: transaction.blockNumber,
             transactionIndex: transaction.transactionIndex,
             decoration: String(describing: fullTransaction.decoration)
@@ -128,7 +128,7 @@ extension EIP20Adapter {
     }
 
     func estimatedGasLimit(to address: Address, value: Decimal, gasPrice: GasPrice) async throws -> Int {
-        let value = BigUInt(value.ww.roundedString(decimal: token.decimal))!
+        let value = BigUInt(value.sw.roundedString(decimal: token.decimal))!
         let transactionData = eip20Kit.transferTransactionData(to: address, value: value)
 
         return try await evmKit.fetchEstimateGas(transactionData: transactionData, gasPrice: gasPrice)
@@ -153,7 +153,7 @@ extension EIP20Adapter {
             throw SendError.noSigner
         }
 
-        let value = BigUInt(amount.ww.roundedString(decimal: token.decimal))!
+        let value = BigUInt(amount.sw.roundedString(decimal: token.decimal))!
         let transactionData = eip20Kit.transferTransactionData(to: to, value: value)
 
         let rawTransaction = try await evmKit.fetchRawTransaction(transactionData: transactionData, gasPrice: gasPrice, gasLimit: gasLimit)
